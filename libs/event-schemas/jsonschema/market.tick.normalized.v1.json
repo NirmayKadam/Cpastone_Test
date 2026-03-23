@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "market.tick.normalized.v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "event_type",
+    "event_id",
+    "trace_id",
+    "source",
+    "published_at",
+    "instrument",
+    "market",
+    "timing",
+    "quality"
+  ],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "event_type": {"const": "market.tick.normalized"},
+    "event_id": {"type": "string"},
+    "trace_id": {"type": "string"},
+    "source": {"type": "string"},
+    "published_at": {"type": "string", "format": "date-time"},
+    "instrument": {
+      "type": "object",
+      "required": ["symbol", "expiry", "strike", "option_type", "instrument_token"]
+    },
+    "market": {
+      "type": "object",
+      "required": [
+        "spot_price",
+        "last_traded_price",
+        "bid_price",
+        "ask_price",
+        "bid_qty",
+        "ask_qty",
+        "volume",
+        "open_interest"
+      ]
+    },
+    "timing": {
+      "type": "object",
+      "required": ["exchange_timestamp", "ingestion_timestamp", "normalization_latency_ms"]
+    },
+    "quality": {
+      "type": "object",
+      "required": ["is_valid", "dropped_fields", "anomaly_flags"]
+    }
+  }
+}
